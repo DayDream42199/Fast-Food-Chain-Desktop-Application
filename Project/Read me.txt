@@ -1,0 +1,46 @@
+CREATE USER IF NOT EXISTS 'login'@'localhost' IDENTIFIED BY 'login';
+GRANT SELECT ON restaurantmanagement.employee_logindata TO 'login'@'localhost';
+GRANT SELECT ON restaurantmanagement.employee TO 'login'@'localhost';
+GRANT SELECT ON restaurantmanagement.cashier TO 'login'@'localhost';
+GRANT SELECT ON restaurantmanagement.chef TO 'login'@'localhost';
+GRANT SELECT ON restaurantmanagement.manager TO 'login'@'localhost';
+GRANT SELECT ON restaurantmanagement.superadmin TO 'login'@'localhost';
+FLUSH PRIVILEGES;
+
+CREATE USER IF NOT EXISTS 'cashier'@'localhost' IDENTIFIED BY 'cashier';
+GRANT SELECT, INSERT, UPDATE ON restaurantmanagement.order TO 'cashier'@'localhost';
+GRANT SELECT, INSERT ON restaurantmanagement.order_item TO 'cashier'@'localhost';
+GRANT SELECT ON restaurantmanagement.menu_item TO 'cashier'@'localhost';
+GRANT INSERT ON restaurantmanagement.payment TO 'cashier'@'localhost';
+GRANT SELECT ON restaurantmanagement.category TO 'cashier'@'localhost';
+GRANT SELECT ON restaurantmanagement.tablelastupdate TO 'cashier'@'localhost';
+GRANT EXECUTE ON PROCEDURE restaurantmanagement.check_inventory_item TO 'cashier'@'localhost';
+GRANT EXECUTE ON PROCEDURE restaurantmanagement.deduct_inventory_item TO 'cashier'@'localhost';
+FLUSH PRIVILEGES;
+
+CREATE USER IF NOT EXISTS 'chef'@'localhost' IDENTIFIED BY 'chef';
+GRANT SELECT, UPDATE ON restaurantmanagement.order TO 'chef'@'localhost';
+GRANT SELECT ON restaurantmanagement.order_item TO 'chef'@'localhost';
+GRANT SELECT ON restaurantmanagement.menu_item TO 'chef'@'localhost';
+GRANT SELECT ON restaurantmanagement.tablelastupdate TO 'chef'@'localhost';
+FLUSH PRIVILEGES;
+
+CREATE USER IF NOT EXISTS 'manager'@'localhost' IDENTIFIED BY 'manager';
+GRANT SELECT, INSERT, UPDATE, DELETE ON restaurantmanagement.employee TO 'manager'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON restaurantmanagement.employee_logindata TO 'manager'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON restaurantmanagement.cashier TO 'manager'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON restaurantmanagement.chef TO 'manager'@'localhost';
+GRANT SELECT ON restaurantmanagement.manager TO 'manager'@'localhost';
+GRANT SELECT ON restaurantmanagement.superadmin TO 'manager'@'localhost';
+GRANT SELECT ON restaurantmanagement.order TO 'manager'@'localhost';
+GRANT SELECT ON restaurantmanagement.order_item TO 'manager'@'localhost';
+GRANT SELECT ON restaurantmanagement.payment TO 'manager'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON restaurantmanagement.inventory_item TO 'manager'@'localhost';
+GRANT SELECT ON restaurantmanagement.menu_item TO 'manager'@'localhost';
+GRANT SELECT ON restaurantmanagement.category TO 'manager'@'localhost';
+GRANT SELECT ON restaurantmanagement.tablelastupdate TO 'manager'@'localhost';
+FLUSH PRIVILEGES;
+
+CREATE USER IF NOT EXISTS 'superadmin'@'localhost' IDENTIFIED BY 'superadmin';
+GRANT ALL PRIVILEGES ON restaurantmanagement.* TO 'superadmin'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
